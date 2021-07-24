@@ -3,5 +3,10 @@ from django.shortcuts import render, HttpResponse, redirect
 # Create your views here.
 
 
-def root(request):
-    return redirect("/")
+def index(request):
+    context = {
+        "name": "Noelle",
+        "favorite_color": "turquoise",
+        "pets": ["Bruce", "Fitz", "Georgie"]
+    }
+    return render(request, "index.html", context)
