@@ -20,5 +20,11 @@
       {% endfor %}
     </ul>
     <img src="{% static 'img/image.jpg'%}" alt="" />
+    <form action="/some_route" method="post">
+      {% csrf_token %}
+      <p>Field One: <input name="one" type="text" /></p>
+      <p>Field Two: <input name="two" type="text" /></p>
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
