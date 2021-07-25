@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.box {
+  display: inline-block;
+  text-align: center;
+  border: solid 3px black;
+  width: 250px;
+  margin: 15px;
+  padding: 15px;
+}
+.font1 {
+  font-size: 28px;
+}
+.font2 {
+  font-size: 20px;
+  margin: 15px;
+}
+.font3 {
+  font-size: 20px;
+  padding: 0 15px 0 15px;
+}
+#header p {
+  font-size: 22px;
+  margin: 15px 0 0 15px;
+  display: inline-block;
+}
+.cuadro {
+  border: solid 3px black;
+  display: inline-block;
+  width: 100px;
+}
+
+footer p {
+  margin: 15px;
+  font-size: 20px;
+}
+footer div {
+  border: solid 3px black;
+  margin: 15px;
+  height: 200px auto;
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}

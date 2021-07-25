@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+    <title>Gold Game</title>
+  </head>
+  <body>
+    <div id="header">
+      <p>Your gold :</p>
+      <p class="cuadro">{{ saldo }}</p>
+    </div>
+    <div id="boxes">
+      <div class="box">
+        <form action="/process_money" method="post">
+          {% csrf_token %}
+          <h3 class="font1">Farm</h3>
+          <p class="font2">(earns 10-20 golds)</p>
+          <button name="tipo" value="fram" class="font3" type="submit">
+            Find Gold!
+          </button>
+        </form>
+      </div>
+      <div class="box">
+        <form action="/process_money" method="post">
+          {% csrf_token %}
+          <h3 class="font1">Cave</h3>
+          <p class="font2">(earns 5-10 golds)</p>
+          <button name="tipo" value="cave" class="font3" type="submit">
+            Find Gold!
+          </button>
+        </form>
+      </div>
+      <div class="box">
+        <form action="/process_money" method="post">
+          {% csrf_token %}
+          <h3 class="font1">House</h3>
+          <p class="font2">(earns 2-5 golds)</p>
+          <button name="tipo" value="house" class="font3" type="submit">
+            Find Gold!
+          </button>
+        </form>
+      </div>
+      <div class="box">
+        <form action="/process_money" method="post">
+          {% csrf_token %}
+          <h3 class="font1">Casino</h3>
+          <p class="font2">(earns/takes 0-50 golds)</p>
+          <button name="tipo" value="casino" class="font3" type="submit">
+            Find Gold!
+          </button>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <p>Activities</p>
+      <div>
+        {% for registro in registro %} {% ifequal registro.1 'green' %}
+        <p class="green">{{ registro.0 }}</p>
+        {% endifequal %} {% ifequal registro.1 'red' %}
+        <p class="red">{{ registro.0 }}</p>
+        {% endifequal %} {% endfor %}
+      </div>
+    </footer>
+  </body>
+</html>
