@@ -1,0 +1,130 @@
+(djangoPy3Env) D:\Matias\OneDrive - UNIVERSIDAD ANDRES BELLO\Conocimiento personal\Codig Dojo\Python stack\python_stack\django\django_orm\ORM>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, app, auth, contenttypes, sessions, usuarios, wizard
+Running migrations:
+  Applying usuarios.0003_auto_20210727_1203... OK
+
+(djangoPy3Env) D:\Matias\OneDrive - UNIVERSIDAD ANDRES BELLO\Conocimiento personal\Codig Dojo\Python stack\python_stack\django\django_orm\ORM>python manage.py shell
+C:\Users\matia\AppData\Local\Programs\Python\Python36\lib\site-packages\IPython\core\interactiveshell.py:935: UserWarning: Attempting to work in a virtualenv. If you encounter problems, please install IPython inside the virtualenv.
+  warn("Attempting to work in a virtualenv. If you encounter problems, please "
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.16.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from usuarios.models import *
+
+In [2]: usuarios.objects.create(first_name="Matias",last_name="Farias",email_address="mat.fariasc@icloud.com",age="23")
+   ...:
+Out[2]: <usuarios: usuarios object (1)>
+
+In [3]: usuarios.objects.create(first_name="jesus",last_name="figueroa",email_address="jfigueroa@gmail.com",age="23")
+Out[3]: <usuarios: usuarios object (2)>
+
+In [4]: usuarios.objects.create(first_name="Martin",last_name="Farias",email_address="mfarias@hotmial.com",age="17")
+Out[4]: <usuarios: usuarios object (3)>
+
+In [5]: all_user = usuarios.objects.all()
+
+In [6]: print(all_user)
+<QuerySet [<usuarios: usuarios object (1)>, <usuarios: usuarios object (2)>, <usuarios: usuarios object (3)>]>
+
+In [7]: print(all_user.__dict__)
+{'model': <class 'usuarios.models.usuarios'>, '_db': None, '_hints': {}, 'query': <django.db.models.sql.query.Query object at 0x0000026D67A20B70>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None}
+
+In [8]: print(all_user.values()
+   ...: )
+<QuerySet [{'id': 1, 'first_name': 'Matias', 'last_name': 'Farias', 'email_address': 'mat.fariasc@icloud.com', 'age': 23, 'created_at': datetime.datetime(2021, 7, 27, 16, 4, 41, 637517, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 4, 41, 637517, tzinfo=<UTC>)}, {'id': 2, 'first_name': 'jesus', 'last_name': 'figueroa', 'email_address': 'jfigueroa@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 7, 27, 16, 5, 18, 699637, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 5, 18, 699637, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Martin', 'last_name': 'Farias', 'email_address': 'mfarias@hotmial.com', 'age': 17, 'created_at': datetime.datetime(2021, 7, 27, 16, 6, 24, 439106, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 6, 24, 439106, tzinfo=<UTC>)}]>
+
+In [9]: last_user = usuarios.objects.last()
+
+In [10]: print(last_user.values)
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-10-3af121b6c94f> in <module>
+----> 1 print(last_user.values)
+
+AttributeError: 'usuarios' object has no attribute 'values'
+
+In [11]: print(last_user)
+usuarios object (3)
+
+In [12]: print(last_user.values())
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-12-c1b585b3e564> in <module>
+----> 1 print(last_user.values())
+
+AttributeError: 'usuarios' object has no attribute 'values'
+
+In [13]: frist_user = usuarios.objects.first()
+
+In [14]: print(frist_user)
+usuarios object (1)
+
+In [15]: usuarios.objects.get(id=3).last_name="Pancakes".save()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-15-32c5813e4af3> in <module>
+----> 1 usuarios.objects.get(id=3).last_name="Pancakes".save()
+
+AttributeError: 'str' object has no attribute 'save'
+
+In [16]: update = usuarios.objects.get(id=3)
+
+In [17]: update.last_name = "Pancakes"
+
+In [18]: update.save()
+
+In [19]: all_user = usuarios.objects.all()
+
+In [20]: print(all_user.__dict__)
+{'model': <class 'usuarios.models.usuarios'>, '_db': None, '_hints': {}, 'query': <django.db.models.sql.query.Query object at 0x0000026D679F6B38>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None}
+
+In [21]: print(last_user.values())
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-21-c1b585b3e564> in <module>
+----> 1 print(last_user.values())
+
+AttributeError: 'usuarios' object has no attribute 'values'
+
+In [22]: print(all_user.values())
+<QuerySet [{'id': 1, 'first_name': 'Matias', 'last_name': 'Farias', 'email_address': 'mat.fariasc@icloud.com', 'age': 23, 'created_at': datetime.datetime(2021, 7, 27, 16, 4, 41, 637517, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 4, 41, 637517, tzinfo=<UTC>)}, {'id': 2, 'first_name': 'jesus', 'last_name': 'figueroa', 'email_address': 'jfigueroa@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 7, 27, 16, 5, 18, 699637, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 5, 18, 699637, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Martin', 'last_name': 'Pancakes', 'email_address': 'mfarias@hotmial.com', 'age': 17, 'created_at': datetime.datetime(2021, 7, 27, 16, 6, 24, 439106, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 57, 37, 76672, tzinfo=<UTC>)}]>
+
+In [23]: usuarios.objects.get(id=2).delete()
+Out[23]: (1, {'usuarios.usuarios': 1})
+
+In [24]: all_user = usuarios.objects.all()
+
+In [25]: print(all_user.values())
+<QuerySet [{'id': 1, 'first_name': 'Matias', 'last_name': 'Farias', 'email_address': 'mat.fariasc@icloud.com', 'age': 23, 'created_at': datetime.datetime(2021, 7, 27, 16, 4, 41, 637517, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 4, 41, 637517, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Martin', 'last_name': 'Pancakes', 'email_address': 'mfarias@hotmial.com', 'age': 17, 'created_at': datetime.datetime(2021, 7, 27, 16, 6, 24, 439106, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 27, 16, 57, 37, 76672, tzinfo=<UTC>)}]>
+
+In [26]: print(all_user)
+<QuerySet [<usuarios: usuarios object (1)>, <usuarios: usuarios object (3)>]>
+
+In [27]: usuarios.objects.all().oder_by("first_name")
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-27-f5b60153499f> in <module>
+----> 1 usuarios.objects.all().oder_by("first_name")
+
+AttributeError: 'QuerySet' object has no attribute 'oder_by'
+
+In [28]: print(usuarios.objects.all().oder_by("first_name"))
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-28-9e23a71e3df0> in <module>
+----> 1 print(usuarios.objects.all().oder_by("first_name"))
+
+AttributeError: 'QuerySet' object has no attribute 'oder_by'
+
+In [29]: order = usuarios.objects.all().oder_by("first_name")
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-29-7e47e39c388d> in <module>
+----> 1 order = usuarios.objects.all().oder_by("first_name")
+
+AttributeError: 'QuerySet' object has no attribute 'oder_by'
+
+In [30]: usuarios.objects.all().order_by("first_name")
+Out[30]: <QuerySet [<usuarios: usuarios object (3)>, <usuarios: usuarios object (1)>]>
