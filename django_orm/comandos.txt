@@ -1,0 +1,181 @@
+Consulta: crea 5 libros con los siguientes nombres: C Sharp, Java, Python, PHP, Ruby
+
+In [1]: from books_authors_app.models import *
+
+In [2]: book.objects.create(title="C Sharp")
+Out[2]: <book: books object (1)>
+
+In [3]: book.objects.create(title="Java")
+Out[3]: <book: books object (2)>
+
+In [4]: book.objects.create(title="Python")
+Out[4]: <book: books object (3)>
+
+In [5]: book.objects.create(title="PHP")
+Out[5]: <book: books object (4)>
+
+In [6]: book.objects.create(title="Ruby")
+Out[6]: <book: books object (5)>
+
+#################################################################
+ Consulta: Crea 5 autores diferentes: Jane Austen, Emily Dickinson, Fyodor Dostoevksy, William Shakespeare, Lau Tzu
+
+ In [7]: author.objects.create(first_name="Jane",last_name="Austeh")
+Out[7]: <author: authors object (1)>
+
+In [8]: author.objects.create(first_name="Emily",last_name="Dickinson")
+Out[8]: <author: authors object (2)>
+
+In [9]: author.objects.create(first_name="Fyodor",last_name="Dostoevksy")
+Out[9]: <author: authors object (3)>
+
+In [10]: author.objects.create(first_name="William",last_name="Shakespeare")
+Out[10]: <author: authors object (4)>
+
+In [11]: author.objects.create(first_name="Lau",last_name="Tzu")
+Out[11]: <author: authors object (5)>
+
+In [12]: 
+
+#################################################################
+Consulta: cambie el nombre del libro de C Sharp a C #
+
+In [2]: update = book.objects.get(id=1)
+
+In [3]: update.title = "C #"
+
+In [4]: update.save()
+
+#################################################################
+Consulta: cambie el nombre del cuarto autor a Bill
+
+In [17]: update = author.objects.get(id=4)
+
+In [18]: update.first_name  = "Bill"
+
+In [19]: update.save()
+
+#################################################################
+Consulta: Asigna el primer autor a los primeros 2 libros.
+
+In [2]: this_book = book.objects.get(id=1)
+
+In [3]: this_author = author.objects.get(id=1)
+
+In [4]: this_author.books.add(this_book)
+
+In [5]: this_book = book.objects.get(id=2)
+
+In [6]: this_author.books.add(this_book)
+
+#################################################################
+Consulta: Asigne el segundo autor a los primeros 3 libros.
+
+In [9]: this_author = author.objects.get(id=2)
+
+In [10]: this_book = book.objects.get(id=1)
+
+In [11]: this_author.books.add(this_book)
+
+In [12]: this_book = book.objects.get(id=2)
+
+In [13]: this_author.books.add(this_book)
+
+In [14]: this_book = book.objects.get(id=3)
+
+In [15]: this_author.books.add(this_book)
+
+#################################################################
+Consulta: Asigna el tercer autor a los primeros 4 libros.
+
+In [17]: this_book = book.objects.get(id=1)
+
+In [18]: this_author = author.objects.get(id=3)
+
+In [19]: this_author.books.add(this_book)
+
+In [20]: this_book = book.objects.get(id=2)
+
+In [21]: this_author.books.add(this_book)
+
+In [22]: this_book = book.objects.get(id=3)
+
+In [23]: this_author.books.add(this_book)
+
+In [24]: this_book = book.objects.get(id=4)
+
+In [25]: this_author.books.add(this_book)
+
+#################################################################
+Consulta: Asigne el cuarto autor a los primeros 5 libros (o en otras palabras, todos los libros). 
+
+In [35]: this_author = author.objects.get(id=4)
+
+In [36]: this_book = book.objects.all()
+
+In [37]: for this_book in book.objects.all():
+    ...:     this_author.books.add(this_book)
+    ...: 
+
+#################################################################
+Consulta: recupera a todos los autores del tercer libro
+
+In [38]: this_book = book.objects.get(id=3)
+
+In [48]: print(this_book.authors.all())
+<QuerySet [<author: author object (2)>, <author: author object (3)>, <author: author object (4)>]>
+
+In [52]: for author in this_book.authors.all():
+    ...:     print(author.first_name,author.last_name)
+    ...: 
+    ...: 
+    ...: 
+Emily Dickinson
+Fyodor Dostoevksy
+Bill Shakespeare
+
+#################################################################
+Consulta: eliminar al primer autor del tercer libro
+
+In [3]: this_author = author.objects.get(id=1)
+
+In [4]: this_book = book.objects.get(id=3)
+
+In [5]: this_author.books.remove(this_book)
+
+#################################################################
+Consulta: Agregue el quinto autor como uno de los autores del segundo libro.
+
+In [6]: this_author = author.objects.get(id=5)
+
+In [7]: this_book = book.objects.get(id=2)
+
+In [8]: this_author.books.add(this_book)
+
+#################################################################
+Consulta: Encuentra todos los libros de los que el tercer autor es parte
+
+In [9]: this_author = author.objects.get(id=3)
+
+In [10]: for book in this_author.books.all():
+    ...:     print(book.title)
+    ...: 
+C #
+Java
+Python
+PHP
+
+In [11]: this_author.books.all()
+Out[11]: <QuerySet [<book: book object (1)>, <book: book object (2)>, <book: book object (3)>, <book: book object (4)>]>
+
+#################################################################
+Consulta: Encuentra todos los autores que contribuyeron al quinto libro.
+
+In [2]: this_book = book.objects.get(id=5)
+
+In [3]: for author in this_book.authors.all():
+   ...:     print(author.first_name,author.last_name)
+   ...: 
+Bill Shakespeare
+
+In [4]: 
