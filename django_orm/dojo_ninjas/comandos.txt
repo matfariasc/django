@@ -1,0 +1,122 @@
+Ejecuta el shell e importe sus modelos
+
+(djangoPy3Env) D:\Matias\OneDrive - UNIVERSIDAD ANDRES BELLO\Conocimiento personal\Codig Dojo\Python stack\python_stack\django\django_orm\dojo_ninjas>python manage.py shell
+C:\Users\matia\AppData\Local\Programs\Python\Python36\lib\site-packages\IPython\core\interactiveshell.py:935: UserWarning: Attempting to work in a virtualenv. If you encounter problems, please install IPython inside the virtualenv.
+  warn("Attempting to work in a virtualenv. If you encounter problems, please "
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.16.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: 
+
+In [1]: from dojo_ninjas_app.models import *
+
+#############################################################################
+Consulta: Crea 3 nuevos dojos
+
+
+nuevo_dojo = dojos.objects.create(name="tokio",city="San francisco",state="CA")
+nuevo_dojo = dojos.objects.create(name="osaka",city="Columbus",state="OH")
+nuevo_dojo = dojos.objects.create(name="tokio",city="Orlando",state="FL")
+
+#############################################################################
+Consulta: elimina los 3 dojos que acaba de crear
+
+borrador_dojo = dojos.objects.get(id=1)
+borrador_dojo.delete()
+
+borrador_dojo = dojos.objects.get(id=2)
+borrador_dojo.delete()
+
+borrador_dojo = dojos.objects.get(id=3)
+borrador_dojo.delete()
+
+
+#############################################################################
+Consulta: Crea 3 dojos más
+
+dojos.objects.create(name="tokio",city="San francisco",state="CA")
+dojos.objects.create(name="osaka",city="Columbus",state="OH")
+dojos.objects.create(name="tokio",city="Orlando",state="FL")
+
+#############################################################################
+Consulta: crea 3 ninjas que pertenecen al primer dojo
+
+ninjas.objects.create(first_name="Matias",last_name="Farias",dojo= dojos.objects.get(id=4))
+ninjas.objects.create(first_name="Martin",last_name="Farias",dojo= dojos.objects.get(id=4))
+ninjas.objects.create(first_name="Lucas",last_name="Farias",dojo= dojos.objects.get(id=4))
+
+#############################################################################
+Consulta: crea 3 ninjas que pertenecen al segundo dojo
+
+ninjas.objects.create(first_name="Cristhoper",last_name="Escobar",dojo= dojos.objects.get(id=5))
+ninjas.objects.create(first_name="Sebastian",last_name="Blanco",dojo= dojos.objects.get(id=5))
+ninjas.objects.create(first_name="Ignacio",last_name="Flores",dojo= dojos.objects.get(id=5))
+
+#############################################################################
+Consulta: crea 3 ninjas que pertenecen al tercer dojo
+
+ninjas.objects.create(first_name="Manuel",last_name="Mendez",dojo= dojos.objects.get(id=6))
+ninjas.objects.create(first_name="Rodrigo",last_name="Gallardo",dojo= dojos.objects.get(id=6))
+ninjas.objects.create(first_name="Lucas",last_name="Farias",dojo= dojos.objects.get(id=6))
+
+#############################################################################
+
+Consulta: recupera todos los ninjas del primer dojo
+
+In [41]: recupera = dojos.objects.first()
+
+In [42]: print(recupera)
+dojos object (4)
+
+In [43]: for ninja in recupera.dojos.all():
+    ...:     print(ninja.first_name,ninja.last_name)
+    ...: 
+Matias Farias
+Martin Farias
+Lucas Farias
+
+
+#############################################################################
+Consulta: recupera todos los ninjas del último dojo
+
+In [44]: recupera = dojos.objects.last()
+
+In [45]: for ninja in recupera.dojos.all():
+    ...:     print(ninja.first_name,ninja.last_name)
+    ...: 
+Manuel Mendez
+Rodrigo Gallardo
+Maria Alicia
+
+
+#############################################################################
+Consulta: recupera el último dojo del ninja
+
+In [46]: print(recupera.dojos.last())
+ninjas object (9)
+
+In [47]: print(recupera.dojos.last().__dict__)
+{'_state': <django.db.models.base.ModelState object at 0x0000028FC6C20898>, 'id': 9, 'dojo_id': 6, 'first_name': 'Maria', 'last_name': 'Alicia'}
+
+#############################################################################
+Consulta: crear un nuevo dojo
+
+In [1]: from dojo_ninjas_app.models import *
+
+In [2]: dojos.objects.create(name="hiroshima",city="Miami",state="FL",desc="dojo antiguo")
+Out[2]: <dojos: dojos object (7)>
+
+In [5]: dojos.objects.get(id=7).__dict__
+Out[5]: 
+{'_state': <django.db.models.base.ModelState at 0x203a1b35160>,
+ 'id': 7,
+ 'name': 'hiroshima',
+ 'city': 'Miami',
+ 'state': 'FL',
+ 'desc': 'dojo antiguo'}
+
+In [6]: 
+
+
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+    <title>Gold Game</title>
+  </head>
+  <body>
+    <h1>Author List</h1>
+    <ul>
+      {% for author in authors %}
+      <li>
+        {{author.name}}
+        <ul>
+          <!-- recorrer los libros de cada autor! -->
+          {% for book in author.books.all %}
+          <li><em>{{book.title}}</em></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
